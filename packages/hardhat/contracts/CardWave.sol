@@ -44,6 +44,7 @@ contract CardWave {
     uint[] internal cardIds;
     event CardCreated(uint cardId, address owner, string name, uint amount);
     event CardRedeemed(uint cardId, address redeemer, uint amount);
+    event SpendCard(uint cardId, address recipeint, uint amount );
 
    event createdCard(string);
 
