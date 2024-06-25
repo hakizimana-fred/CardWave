@@ -48,7 +48,7 @@ export default function Home() {
         </div>
         <div className="cards-wrapper">
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <h1>My gift cards</h1>
+                <h1>Redeem gift cards</h1>
                 <ArrowRight color="#000" size={30} />
             </div>
         <div style={{display: 'flex', overflowX: 'scroll', width: '100%'}}>
@@ -60,9 +60,10 @@ export default function Home() {
            
         </div>
         </div>
+    
 
-    <div className='service-list'>
-      
+    <h2 style={{backgroundColor: '#EEE8F4', padding: 10}}>Local businesses</h2>
+    <div className='service-list'>  
      {SERVICES.map((service) => (
         <div className='service-card' key={service.name}>
             <img src={service.img} className='service-img' />

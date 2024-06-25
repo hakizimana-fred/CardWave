@@ -1,8 +1,8 @@
 export const SERVICES = [
-  { name: "meat guy", img: "/images/meatguy.jpg", price: 30 },
-  { name: "maisaha cakes", img: "/images/cakes.png", price: 10 },
-  { name: "nkwanzi scents", img: "/images/nkwanzi.png", price: 5 },
-  { name: "bunny", img: "/images/bunny.png", price: 20 },
-  { name: "sole connection", img: "/images/sole.png", price: 5 },
-  { name: "hair by hawah", img: "/images/hairby.jpg", price: 25 },
+  { name: "Bunny", img: "/images/bunny.png", price: 30 },
+  { name: "haiwan", img: "/images/haiwan.jpg", price: 10 },
+  { name: "Maisha", img: "/images/maisha.png", price: 5 },
+  { name: "Meat Guy", img: "/images/meatguy.jpg", price: 20 },
+  { name: "Sole Collection", img: "/images/sole.png", price: 25 },
+  { name: "Nkwanzi", img: "/images/nkwanzi.png", price: 5 },
 ];

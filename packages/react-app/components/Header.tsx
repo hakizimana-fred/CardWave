@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useConnect } from "wagmi";
 import { injected } from "wagmi/connectors";
 import { Settings } from 'lucide-react';
+import { useRouter } from "next/router";
 
 
 export default function Header() {
@@ -19,12 +20,34 @@ export default function Header() {
         }
     }, []);
 
+    const router = useRouter()
+
+    const renderHeaderTop = () => {
+        if (router.pathname === '/') {
+            return (
+                <>
+                  <img  className='logo' src="/images/31.png" alt="avatar" />
+                <h3>Welcome! <span style={{color: '#0000FF'}}></span></h3>
+                </>
+            )
+        }else if (router.pathname === '/create') {
+            return (
+                <h1>Create Gift card</h1>
+            )
+        }else if(router.pathname === '/history') {
+            return(
+                <h1>History</h1>
+            )
+        }else {
+            console.log('pathname invalid')
+        }
+    }
+
     return (
         <>
          <header className='header-top'>
         <div className='header-content'>
-         <img  className='logo' src="/images/31.png" alt="avatar" />
-         <h3>Welcome! <span style={{color: '#0000FF'}}></span></h3>
+          {renderHeaderTop()}
         </div>
          {!hideConnectBtn ? (
               <ConnectButton
