@@ -1,8 +1,8 @@
 export const SERVICES = [
-    {name: 'uber', img: '/images/uber.png', price: 30},
-    {name: 'kfc', img: '/images/kfclogo.png', price: 10},
-    {name: 'safe boda', img: '/images/safeboda.png', price: 5},
-    {name: 'cafe javas', img: '/images/cjs.png', price: 20},
-    {name: 'faras', img: '/images/faras.png', price: 5},
-    {name: 'bolt', img: '/images/bolt.png', price: 25},
+    {name: 'Bunny', img: '/images/bunny.png', price: 30},
+    {name: 'haiwan', img: '/images/haiwan.jpg', price: 10},
+    {name: 'Maisha', img: '/images/maisha.png', price: 5},
+    {name: 'Meat Guy', img: '/images/meatguy.jpg', price: 20},
+    {name: 'Sole Collection', img: '/images/sole.png', price: 25},
+    {name: 'Nkwanzi', img: '/images/nkwanzi.png', price: 5},
 ]
