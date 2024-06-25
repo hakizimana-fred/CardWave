@@ -1,4 +1,5 @@
 import { SERVICES } from "@/data";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAccount, useBalance } from "wagmi";
 
@@ -27,12 +28,12 @@ export default function Home() {
     }
 
     return (
-        <>
-        <div className="flex flex-col justify-center items-center" style={{background: '#D9D9D9', padding: 20 }}>
+        <div className="wrapper">
+        <div className="balance-wrapper">
             {isConnected ? (
                 <>
-                <h1 className="mb-2">Your Wallet</h1>
-                <div className="h2 text-center pb-3">
+                <h1>Your Wallet</h1>
+                <div className="h2 text-center">
                     balance: ${data?.formatted as any} 
                 </div>
 
@@ -42,9 +43,14 @@ export default function Home() {
                 </>
 
             ) : (
-                <div>No Wallet Connected</div>
+                <div>Please connect your wallet to get started</div>
             )}
         </div>
+        <div className="cards-wrapper">
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <h1>My gift cards</h1>
+                <ArrowRight color="#000" size={30} />
+            </div>
         <div style={{display: 'flex', overflowX: 'scroll', width: '100%'}}>
              {[...Array(10)].map((el, idx) => (
                 <> 
@@ -53,11 +59,12 @@ export default function Home() {
             ))}    
            
         </div>
+        </div>
 
-        <div className='service-list'>
+    <div className='service-list'>
       
      {SERVICES.map((service) => (
-        <div className='card-2' key={service.name}>
+        <div className='service-card' key={service.name}>
             <img src={service.img} className='service-img' />
             <div>
             <p>{service.name}</p>
@@ -66,6 +73,6 @@ export default function Home() {
         </div>
      ))}
     </div>
-    </>
+    </div>
     );
 }
