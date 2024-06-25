@@ -30,6 +30,7 @@ contract CardWave {
      uint[] internal cardIds;
     event CardCreated(uint cardId, address owner, string name, uint amount);
     event CardRedeemed(uint cardId, address redeemer, uint amount);
+    event SpendCard(uint cardId, address recipeint, uint amount );
 
 
   function createCard(string memory name, string memory service, uint256 _amount) public payable {
@@ -62,6 +63,20 @@ contract CardWave {
             cards[_index].amount
         );
     }
+
+   function spendCard(uint cardId, address recipient, uint256 amount) public {
+        require(cardId < nextCardId, "Card does not exist");
+        Card storage card = cards[cardId];
+        require(card.amount >= amount, "Insufficient card balance");
+        require(msg.sender == card.senderAddress, "Only the card owner can spend from it");
+
+        card.amount -= amount;
+        payable(recipient).transfer(amount);
+
+        emit SpendCard(cardId, recipient, amount);
+    }
+ 
+
 
  function getBalance() public view returns (uint) {
         return msg.sender.balance;
