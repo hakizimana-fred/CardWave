@@ -46,12 +46,12 @@ export default   function create() {
 
 const handleSubmit = async (e: any) => {
   e.preventDefault()
-  // if (!businessName || !creatorAddress || amount == '0' || !amount) {
-  //   alert("all fields are required")
-  //   return 
-  // }
+  if (!businessName || !creatorAddress || amount == '0' || !amount) {
+    alert("all fields are required")
+    return 
+  }
   // send to address contract address
-  let cards: any[] = []
+  let cards = JSON.parse(localStorage.getItem('giftcards') || '[]');
   try {
     const signer = await getProviderOrSigner()
     const cardWaveContract = new Contract(
@@ -63,7 +63,7 @@ const handleSubmit = async (e: any) => {
   console.log(cardWaveContract, 'contract')
   console.log(amount, 'amount...')
 
-  const tx = await cardWaveContract.issue(randomBytes, amount)
+  const tx = await cardWaveContract.issue(randomBytes, amount, businessName)
   cards.push({name: businessName, amount, bytes: randomBytes})
   console.log(tx, 'tx')
   localStorage.setItem('giftcards', JSON.stringify(cards))

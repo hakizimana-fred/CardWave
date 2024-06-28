@@ -1,5 +1,5 @@
 import { SERVICES } from "@/data";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight,  } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAccount, useBalance } from "wagmi";
 import { ethers, Contract } from 'ethers'
@@ -11,6 +11,19 @@ export default function Home() {
     const [userAddress, setUserAddress] = useState("");
     const [isMounted, setIsMounted] = useState(false);
     const { address, isConnected } = useAccount();
+
+
+  const [savedCards, setSavedCards] = useState<any[]>([])
+
+  useEffect(() => {
+   (() => {
+     if (typeof window !== "undefined") {
+       const cards: any = localStorage.getItem("giftcards")
+       setSavedCards(JSON.parse(cards))
+     }
+   })()
+  }, [])
+
 
 const getProviderOrSigner = async () => {
     if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
@@ -41,27 +54,29 @@ const getProviderOrSigner = async () => {
         setIsMounted(true);
     }, []);
 
-    // useEffect(() => {
-    //     if (isConnected && address) {
-    //         setUserAddress(address);
-    //     }
-    // }, [address, isConnected]);
+    useEffect(() => {
+        if (isConnected && address) {
+            setUserAddress(address);
+        }
+    }, [address, isConnected]);
 
-    // useEffect(() => {
-    //     (async () => {
-    //     const signer = await getProviderOrSigner()
-    //     const cardWaveContract = new Contract(
-    //         contractAddress,
-    //         cardWaveABI,
-    //         signer
-    //     );
+    useEffect(() => {
+        (async () => {
+        const signer = await getProviderOrSigner()
+        const cardWaveContract = new Contract(
+            contractAddress,
+            cardWaveABI,
+            signer
+        );
 
-    //     const read = await cardWaveContract.readGiftCard(1);
-
-    //     console.log(read, 'business')
-
-    //     })()
-    // }, [])
+        const giftcardDetails = await cardWaveContract.fetchAllGiftcards();
+        
+        const giftcards = giftcardDetails.map((giftcard: any) => {
+            console.log(giftcard, 'gift')
+        })
+        
+        })()
+    }, [])
 
 
    
@@ -70,7 +85,7 @@ const getProviderOrSigner = async () => {
         return null;
     }
 
-    const redeemCard = async () => {
+    const redeemCard = async (bytes: string) => {
         try {
           const signer = await getProviderOrSigner() 
         const cardWaveContract = new Contract(
@@ -78,7 +93,7 @@ const getProviderOrSigner = async () => {
             cardWaveABI,
             signer
     );
-        const redeemedCard = await cardWaveContract.redeem('0x8c49b8af95c56cd2fd9096894c5157d5278ae8a2e318327f096db238bf05d650')
+        const redeemedCard = await cardWaveContract.redeem(bytes)
         console.log(redeemedCard, 'redeemed')
         alert('redeemed successully')
     }catch(e: any) {
@@ -112,17 +127,30 @@ const getProviderOrSigner = async () => {
                 <ArrowRight color="#000" size={30} />
             </div>
         <div style={{display: 'flex', overflowX: 'scroll', width: '100%'}}>
-             {[...Array(10)].map((el, idx) => (
-                <> 
-                <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
-              <div className="card" style={{backgroundImage: "url('/images/kfc-card.png')"}} />  
-              <button className="btn" style={{borderRadius: 20, padding: '12px 20px', width: 100, marginLeft: 15, color: '#fff', backgroundColor: '#000', border: 'none', }} onClick={redeemCard}>
-                Redeem
-              </button>
-              </div>
+           {savedCards.map((card) => (
+
+            <>
+                <div>
+                   <div className="gift-card">
+                     <div>
+                        <div style={{}}>
+                            <p>{card.name}</p>
+                            <p>{card.bytes}</p>
+                        </div>
+                     </div>
+                     <div style={{display: 'flex', flexDirection: 'row',  justifyItems: 'space-between', position: 'absolute', bottom: -6}}>
+                        <p style={{color: 'white', fontWeight: 'bolder', fontSize: 20}}>$5</p>
+                        <img  src="/images/qrcode.png" />
+                     </div>
+                    </div> 
+                        <button className="btn" style={{borderRadius: 20, padding: '12px 20px', width: 100, marginLeft: 15, color: '#fff', backgroundColor: '#000', border: 'none', marginTop: 15}} onClick={() =>redeemCard(card.bytes)}>
+                             Redeem
+                </button>
+                </div>
             </>
-            ))}    
-           
+
+
+           ))}
         </div>
         </div>
     
@@ -135,6 +163,9 @@ const getProviderOrSigner = async () => {
             <div>
             <p>{service.name}</p>
             <p className='service-price'>${service.price}</p>
+            <button className="btn" style={{borderRadius: 20, alignSelf: 'center', padding: '12px 20px', width: 100, marginLeft: 15, color: '#fff', backgroundColor: '#800020', border: 'none', }} onClick={redeemCard}>
+                Spend
+              </button>
             </div>
         </div>
      ))}

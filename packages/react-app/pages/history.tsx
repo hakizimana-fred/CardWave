@@ -1,19 +1,48 @@
-import React from 'react'
+import { SERVICES } from '@/data'
+import React, { useEffect, useState } from 'react'
 
 export default function history() {
+
+  const [savedCards, setSavedCards] = useState<any[]>([])
+
+  useEffect(() => {
+   (() => {
+     if (typeof window !== "undefined") {
+       const cards: any = localStorage.getItem("giftcards")
+       setSavedCards(JSON.parse(cards))
+     }
+   })()
+  }, [])
+
+
+  const cardsWithImages = savedCards.map(card => {
+    const service = SERVICES.find(service => service.name === card.name);
+
+    return {
+        ...card,
+        img: service ? service.img : '' 
+    };
+});
+
+console.log(cardsWithImages, 'cards')
+
   return (
     <div>
-    {[...Array(6)].map((el, idx) => (
-        <>
+    
+    {cardsWithImages.map((card => (
+  <>
         <div className='history-wrapper'>
             <div className='wrapper-dets'>
-                <img className='history-logo' src='/images/bunny.png' />
-                <h4>Name</h4>
+                <img className='history-logo' src={card.img} />
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                <h4>{card.name}</h4>
+                <div>code: {card.bytes}</div>
+                </div>
             </div>
-            <p>$500</p>
+            <p>${card.amount}</p>
         </div>
-        </>
-    ))}
+       </>
+    )))}
     </div>
   )
 }

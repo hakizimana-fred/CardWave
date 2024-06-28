@@ -35,6 +35,26 @@ body {
   background-position: center center;
 }
 
+.gift-card {
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  margin-left: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid green;
+  background-image: url("/images/robin.jpg");
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+
 
 .cards-wrapper {
 

@@ -43,6 +43,75 @@ export const cardWaveABI =   [
     "type": "event"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allGiftcardCodes",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fetchAllGiftcards",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "code",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "string",
+            "name": "businessName",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct CardWave.Giftcard[]",
+        "name": "",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getBalance",
     "outputs": [
@@ -95,6 +164,11 @@ export const cardWaveABI =   [
         "internalType": "uint256",
         "name": "value",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_businessName",
+        "type": "string"
       }
     ],
     "name": "issue",
