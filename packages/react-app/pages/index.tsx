@@ -163,7 +163,7 @@ const getProviderOrSigner = async () => {
             <div>
             <p>{service.name}</p>
             <p className='service-price'>${service.price}</p>
-            <button className="btn" style={{borderRadius: 20, alignSelf: 'center', padding: '12px 20px', width: 100, marginLeft: 15, color: '#fff', backgroundColor: '#800020', border: 'none', }} onClick={redeemCard}>
+            <button className="btn" style={{borderRadius: 20, alignSelf: 'center', padding: '12px 20px', width: 100, marginLeft: 15, color: '#fff', backgroundColor: '#800020', border: 'none', }} onClick={() => alert('work in progress..')}>
                 Spend
               </button>
             </div>

@@ -16,8 +16,11 @@ export default   function create() {
      const { address, isConnected } = useAccount();
      
 
+     // eslint-disable-next-line react-hooks/rules-of-hooks
      const [businessName, setBusinessName] = useState(SERVICES[0].name || '')
+     // eslint-disable-next-line react-hooks/rules-of-hooks
      const [creatorAddress, setAddress] = useState(address || '')
+     // eslint-disable-next-line react-hooks/rules-of-hooks
      const [amount, setAmount] = useState('')
 
 
@@ -104,7 +107,7 @@ console.log('my random byte', randomBytes)
 
 
         <div className='form-control'>
-            <input className='form-input' type="text" value={randomBytes}    placeholder='Amount' name='amount' onChange={(e) => setRandomBytes(e.target.value)} />
+            <input className='form-input' type="text" value={randomBytes}    placeholder='Amount' name='amount' />
         </div>
 
 

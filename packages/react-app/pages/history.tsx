@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 
 export default function history() {
 
-  const [savedCards, setSavedCards] = useState<any[]>([])
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [savedCards, setSavedCards] = React.useState<any[]>([])
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
    (() => {
      if (typeof window !== "undefined") {
