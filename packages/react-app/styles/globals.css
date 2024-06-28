@@ -121,13 +121,24 @@ img {
   width: 100%;
   padding: 20px;
 }
-.create-form input[type=text] {
+.create-form input[type=text], .create-form input[type=number] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
   border: 1px solid #F3F7FC;
+
 }
+
+.create-form .form-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #F3F7FC;
+
+}
+
 .create-form button {
   padding: 14px 20px;
   width: 100%;

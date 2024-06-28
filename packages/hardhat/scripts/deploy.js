@@ -7,10 +7,12 @@
 const hre = require("hardhat");
 
 async function main() {
+  //const initialFunding = hre.ethers.utils.parseEther('0.0025')
   const CardWave = await hre.ethers.getContractFactory("CardWave");
   const cardWave = await CardWave.deploy();
   await cardWave.deployed();
   console.log("Contract Deployed to: ", cardWave.address);
+  //console.log("Contract funded with:", initialFunding.toString(), "wei");
 }
 
 // We recommend this pattern to be able to use async/await everywhere

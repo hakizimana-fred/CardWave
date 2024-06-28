@@ -28,6 +28,9 @@
         "celo"
     ],
     "dependencies": {
-        "lucide-react": "^0.396.0"
+        "lucide-react": "^0.396.0",
+        "react-toastify": "^10.0.5",
+        "viem": "^2.16.2",
+        "web3modal": "^1.9.12"
     }
 }

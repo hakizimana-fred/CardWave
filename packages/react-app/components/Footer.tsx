@@ -23,3 +23,5 @@ import { useRouter } from 'next/router'
   </footer>
     )
   }
+
+  // $PlAeq$Ru%ECazTklE
