@@ -15,11 +15,13 @@ address public owner;
     struct Giftcard {
         address owner;
         uint value;
-        bytes32 code; // Store the code used for issuing the gift card
+        bytes32 code; 
+        string businessName;
     }
 
     mapping (address => uint) balances;
     mapping (bytes32 => Giftcard) giftcards;
+    bytes32[] public allGiftcardCodes;
 
     event Redeemed(address indexed _by, bytes32 _hash);
     event Spent(address indexed _by, uint _amount);
@@ -28,16 +30,18 @@ address public owner;
         owner = msg.sender;
     }
 
-    function issue(bytes32 code, uint value) public {
+    function issue(bytes32 code, uint value, string memory _businessName) public {
         require(msg.sender == owner, "Only the owner can issue new giftcards");
         require(value > 0, "Giftcard must have a balance");
         require(giftcards[code].value == 0, "Giftcard already issued");
 
         giftcards[code] = Giftcard({
             value: value,
-            owner: address(0), // No owner initially
-            code: code
+            owner: address(0), 
+            code: code,
+            businessName: _businessName
         });
+      allGiftcardCodes.push(code);
     }
 
     function redeem(bytes32 code) public {
@@ -73,7 +77,24 @@ address public owner;
         return (giftcard.owner, giftcard.value, giftcard.code);
     }
 
- 
+ function fetchAllGiftcards() public view returns (Giftcard[] memory, bytes32[] memory, uint[] memory, address[] memory) {
+        uint length = allGiftcardCodes.length;
+        Giftcard[] memory giftcardDetails = new Giftcard[](length);
+        bytes32[] memory codes = new bytes32[](length);
+        uint[] memory values = new uint[](length);
+        address[] memory owners = new address[](length);
+        string[] memory businessName = new string[](length);
+        
+        for (uint i = 0; i < length; i++) {
+            Giftcard storage giftcard = giftcards[allGiftcardCodes[i]];
+            giftcardDetails[i] = giftcard;
+            codes[i] = giftcard.code;
+            values[i] = giftcard.value;
+            owners[i] = giftcard.owner;
+            businessName[i] = giftcard.businessName;
+        }
+        return (giftcardDetails, codes, values, owners);
+}
 
     receive() external payable {}
   
