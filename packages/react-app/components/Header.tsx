@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 export default function Header() {
     const [hideConnectBtn, setHideConnectBtn] = useState(false);
-    const { connect } = useConnect();
+    const { connect } = useConnect() as any;
 
     useEffect(() => {
         if (window.ethereum && window.ethereum.isMiniPay) {

@@ -28,6 +28,8 @@
         "celo"
     ],
     "dependencies": {
+        "@rainbow-me/rainbowkit": "^2.1.2",
+        "ethers": "^6.13.1",
         "lucide-react": "^0.396.0",
         "react-toastify": "^10.0.5",
         "viem": "^2.16.2",
