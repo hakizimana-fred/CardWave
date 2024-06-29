@@ -12,7 +12,7 @@ import { celo, celoAlfajores } from "wagmi/chains";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const connectors = connectorsForWallets(
+const connectors: any = connectorsForWallets(
     [
         {
             groupName: "Recommended",
@@ -25,7 +25,7 @@ const connectors = connectorsForWallets(
     }
 );
 
-const config = createConfig({
+const config: any = createConfig({
     connectors,
     chains: [celo, celoAlfajores],
     transports: {
