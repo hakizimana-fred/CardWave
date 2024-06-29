@@ -12,7 +12,7 @@ import { celo, celoAlfajores } from "wagmi/chains";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const connectors: any = connectorsForWallets(
+const connectors = connectorsForWallets(
     [
         {
             groupName: "Recommended",
